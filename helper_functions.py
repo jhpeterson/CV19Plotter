@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Apr  5 18:00:19 2020
+Created on Sun Apr  5 2020
 
 @author: Jeff Peterson
 """

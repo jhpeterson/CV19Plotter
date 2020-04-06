@@ -1,8 +1,15 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Apr  5 16:42:29 2020
+Created on Sun Apr  5 2020
 
 @author: Jeff Peterson
+
+This script automatically fetches the latest state data sets from the COVID
+tracking project and then plots the change in cases versus the total number of
+cases. If the plot is linear or has a constant slope, then this indicates
+exponential growth. If the slope beocmes negative, that means that the number
+of new cases per day is decreasing and that the exponential growth has been
+haulted.
 """
 import numpy as np
 from urllib.request import urlopen
