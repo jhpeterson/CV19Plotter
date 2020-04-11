@@ -28,19 +28,19 @@ N_avg = 5
 # Number of points at the end of the data over which to find the slope
 N_slope = 15
 
+# Data comes from the COVID Tracking Project
+# https://covidtracking.com/
+
+state_data_url  =   'https://covidtracking.com/api/v1/states/daily.json'
+state_info_url  =   'https://covidtracking.com/api/v1/states/info.json'
+us_data_url     =   'https://covidtracking.com/api/us/daily'
+
 ##############################################################################
 # CODE
 ##############################################################################
 
 # Close all figures
 plt.close('all')
-
-# Initial loading of the data from the COVID Tracking Project
-# https://covidtracking.com/
-
-state_data_url  =   'https://covidtracking.com/api/v1/states/daily.json'
-state_info_url  =   'https://covidtracking.com/api/v1/states/info.json'
-us_data_url     =   'https://covidtracking.com/api/us/daily'
 
 # Transform state data
 state_data      =   data_by_state(state_data_url, us_data_url=us_data_url)
