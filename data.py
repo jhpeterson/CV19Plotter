@@ -20,7 +20,7 @@ from helper_functions import data_by_state, plot_state_data
 
 # Which states to compare my state to
 my_state = 'NM'
-comparison_states = ['NY','WA', 'SD', 'MT']
+comparison_states = ['NY','WA', 'OR', 'MN', 'MD']
 
 # Number of days over which to perform a moving average
 N_avg = 5
@@ -49,7 +49,7 @@ state_info      =   data_by_state(state_info_url)
 # Plot all of the states on one plot
 slopes_by_state = plot_state_data(state_data, state_info, N_avg, N_slope)
 for state, slope in sorted(slopes_by_state.items(), key=lambda x: x[1]):
-    print(state, slope)
+    print(state, slope, state_data[state]['positive'][-1])
 
 # Combine my_state with comparison states and the overall US data
 try:
@@ -59,7 +59,7 @@ except ValueError:
 comparison_states = ['US'] + [my_state] + comparison_states
 
 # Plot a subset of state data
-select_data = {state:data for state, data in state_data.items() if state in comparison_states}
+select_data = {state:state_data[state] for state in comparison_states}
 plot_state_data(select_data, state_info, N_avg, N_slope, labels=True, my_state=my_state)
 
 plt.show()

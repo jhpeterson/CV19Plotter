@@ -75,6 +75,8 @@ def plot_state_data(data_dict, data_info, N_avg, N_slope, labels=False, my_state
     ax.legend()
     ax.set_yscale('log')
     ax.set_xscale('log')
+    ax.set_ylim(bottom=1.0)
+    ax.set_xlim(left=1.0)
     ax.set_xlabel('Total number of positive cases')
     ax.set_ylabel('Increase in positive cases')
     
@@ -166,7 +168,7 @@ class data_by_state(dict):
                 keys = entries.keys()
             except AttributeError:
                 # There are multiple entries
-                keys = entries[0].keys()
+                keys = entries[-1].keys()
                 # Store the data as a time series for each entry for each state
                 self[state] = dict()
                 for k in keys:
