@@ -11,8 +11,12 @@ exponential growth. If the slope beocmes negative, that means that the number
 of new cases per day is decreasing and that the exponential growth has been
 haulted.
 """
+
 from matplotlib import pyplot as plt
-from helper_functions import data_by_state, plot_state_data
+from helper_functions import data_by_state
+from helper_functions import plot_state_data
+from helper_functions import plot_percent_positive
+from helper_functions import sort_states_by
 
 ##############################################################################
 # CUSTOMIZABLE VARIABLES
@@ -20,7 +24,7 @@ from helper_functions import data_by_state, plot_state_data
 
 # Which states to compare my state to
 my_state = 'NM'
-comparison_states = ['NY','WA', 'OR', 'MN', 'MD']
+comparison_states = ['WA','MN', 'LA', 'NY', 'CA', 'NJ', 'ME', 'MS', 'GU', 'ND', 'OH', 'TX', 'FL']
 
 # Number of days over which to perform a moving average
 N_avg = 5
@@ -48,8 +52,6 @@ state_info      =   data_by_state(state_info_url)
 
 # Plot all of the states on one plot
 slopes_by_state = plot_state_data(state_data, state_info, N_avg, N_slope)
-for state, slope in sorted(slopes_by_state.items(), key=lambda x: x[1]):
-    print(state, slope, state_data[state]['positive'][-1])
 
 # Combine my_state with comparison states and the overall US data
 try:
@@ -61,5 +63,10 @@ comparison_states = ['US'] + [my_state] + comparison_states
 # Plot a subset of state data
 select_data = {state:state_data[state] for state in comparison_states}
 plot_state_data(select_data, state_info, N_avg, N_slope, labels=True, my_state=my_state)
+
+# Plot the percent positive over the last few days versus the slope of the
+# positive trend on a scatter plot
+N_avg_pct_pos = N_slope
+plot_percent_positive(state_data, slopes_by_state, N_avg_pct_pos, N_slope, label_states=comparison_states)
 
 plt.show()
